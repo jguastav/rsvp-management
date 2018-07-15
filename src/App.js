@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Guest from './Components/Guest';
+import GuestList from './Components/GuestList';
 import './App.css';
 
 class App extends Component {
@@ -37,15 +37,9 @@ class App extends Component {
   render() {
     return (
       <div className="content-wrapper">
-        {this.state.guests.map(guest =>
-          <Guest
-            name={guest.name}
-            address={guest.address}
-            isConfirmed={guest.isConfirmed}
-            headcount={guest.headcount}
-            isEditing={false}
-          />
-        )}
+        <GuestList
+          guests={this.state.guests}
+         />
       </div>
     );
   }
