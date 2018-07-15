@@ -1,0 +1,22 @@
+.guest__meta {
+  display: flex;
+}
+.guest__rsvp,
+.guest__headcount {
+  border-radius: 4px;
+  padding: 4px;
+  display: inline-block;
+}
+.guest__rsvp {
+  color: #fff;
+  background-color: #8897a2;
+}
+.guest__rsvp--yes {
+  background-color: #5aa700;
+}
+
+.guest__headcount {
+  color: #999;
+  border: 1px solid #ccc;
+  margin-left: 4px;
+}
