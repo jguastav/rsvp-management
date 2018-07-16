@@ -2,7 +2,7 @@
   display: flex;
 }
 .guest__rsvp,
-.guest__headcount {
+.guest__guests {
   border-radius: 4px;
   padding: 4px;
   display: inline-block;
@@ -15,8 +15,12 @@
   background-color: #5aa700;
 }
 
-.guest__headcount {
+.guest__guests {
   color: #999;
   border: 1px solid #ccc;
   margin-left: 4px;
+}
+
+.edit-guest__form .bx--form-item {
+  margin: 4px 0 12px 20px;
 }

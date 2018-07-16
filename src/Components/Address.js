@@ -4,7 +4,7 @@ import './Address.css';
 
 const Address = props => (
   <div className="address">
-    <h4>Address</h4>
+    {/* <h4>Address</h4> */}
     <div className="address__l1">{props.l1}</div>
     <div className="address__l2">{props.l2}</div>
     <div className="address__l3">{props.city ? props.city + ", " : ""}{props.state ? props.state + " " : ""}{props.zipcode}</div>
