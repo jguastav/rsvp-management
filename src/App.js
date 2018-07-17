@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Tile } from 'carbon-components-react';
+import { ModalWrapper } from 'carbon-components-react';
 import GuestList from './Components/GuestList';
+import EditGuest from './Components/EditGuest';
 import './App.css';
 
 class App extends Component {
@@ -92,6 +95,20 @@ class App extends Component {
         [attribute]: value
       }
     });
+
+    handleAddGuest = (e, id) => {
+      let newGuest = this.state.guestData;
+      newGuest.id = Math.random().toString(36).substr(2, 9);
+      this.setState({
+        guests: [
+          ...this.state.guests,
+          newGuest
+        ],
+        guestData: {}
+      });
+  
+      return true;
+    }
   
   handleUpdateGuest = (e, id) => {
     this.setState({
@@ -113,6 +130,31 @@ class App extends Component {
   render() {
     return (
       <div className="content-wrapper">
+        <Tile>
+          <ModalWrapper
+            id={"edit-new-guest-modal"}
+            buttonTriggerText="Add Guest"
+            modalHeading={"Add Guest"}
+            handleSubmit={e => this.handleAddGuest(e)}
+            shouldCloseAfterSubmit
+          >
+            <EditGuest
+              id=""
+              name=""
+              address={{l1: "", l2: "", city: "", state: "", zipcode: ""}}
+              isConfirmed={false}
+              guests={0}
+              handleGuestName={e => this.handleGuestName(e.target.value)}
+              handleGuestRsvp={checked => this.handleGuestRsvp(checked)}
+              handleGuestGuests={e => this.handleGuestGuests(Number(e.imaginaryTarget.value))}
+              handleAddressL1={e => this.handleAddressL1(e.target.value)}
+              handleAddressL2={e => this.handleAddressL2(e.target.value)}
+              handleAddressCity={e => this.handleAddressCity(e.target.value)}
+              handleAddressState={e => this.handleAddressState(e.target.value)}
+              handleAddressZipcode={e => this.handleAddressZipcode(e.target.value)}
+            />
+          </ModalWrapper>
+        </Tile>
         <GuestList
           guests={this.state.guests}
           handleGuestName={this.handleGuestName}

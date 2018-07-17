@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { ExpandableTile } from 'carbon-components-react';
 import Guest from './Guest';
 
 const Guests = props => (

@@ -25,7 +25,7 @@ const Guest = props => (
       </div>
       <div className="guest__edit">
         <ModalWrapper
-          id="edit-guest-modal"
+          id={"edit-guest-" + props.name + "-modal"}
           buttonTriggerText="Edit"
           modalHeading={"Edit " + props.name}
           handleSubmit={e => props.handleUpdateGuest(e)}
