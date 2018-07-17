@@ -16,6 +16,11 @@ const Guests = props => (
           handleGuestName={name => props.handleGuestName(name, guest.id)}
           handleGuestRsvp={rsvp => props.handleGuestRsvp(rsvp, guest.id)}
           handleGuestGuests={guests => props.handleGuestGuests(guests, guest.id)}
+          handleAddressL1={l1 => props.handleAddressL1(l1)}
+          handleAddressL2={l2 => props.handleAddressL2(l2)}
+          handleAddressCity={city => props.handleAddressCity(city)}
+          handleAddressState={state => props.handleAddressState(state)}
+          handleAddressZipcode={zipcode => props.handleAddressZipcode(zipcode)}
           handleUpdateGuest={(e) => props.handleUpdateGuest(e, guest.id)}
         />
       </li>
@@ -28,6 +33,11 @@ Guests.propTypes = {
   handleGuestName: PropTypes.func.isRequired,
   handleGuestRsvp: PropTypes.func.isRequired,
   handleGuestGuests: PropTypes.func.isRequired,
+  handleAddressL1: PropTypes.func.isRequired,
+  handleAddressL2: PropTypes.func.isRequired,
+  handleAddressCity: PropTypes.func.isRequired,
+  handleAddressState: PropTypes.func.isRequired,
+  handleAddressZipcode: PropTypes.func.isRequired,
   handleUpdateGuest: PropTypes.func.isRequired
 }
 

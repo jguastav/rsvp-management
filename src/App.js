@@ -59,6 +59,31 @@ class App extends Component {
   handleGuestGuests = (guests, id) =>
     this.updateGuestData('guests', guests, id);
 
+  handleAddressL1 = (l1) =>
+    this.updateGuestAddress('l1', l1);
+
+  handleAddressL2 = (l2) =>
+    this.updateGuestAddress('l2', l2);
+
+  handleAddressCity = (city) =>
+    this.updateGuestAddress('city', city);
+
+  handleAddressState = (state) =>
+    this.updateGuestAddress('state', state);
+
+  handleAddressZipcode = (zipcode) =>
+    this.updateGuestAddress('zipcode', zipcode);
+
+  updateGuestAddress = (attribute, value) => 
+    this.setState({
+      guestData: {
+        address: {
+          ...this.state.guestData.address,
+          [attribute]: value
+        }
+      }
+    });
+
   updateGuestData = (attribute, value, id) => 
     this.setState({
       guestData: {
@@ -93,6 +118,11 @@ class App extends Component {
           handleGuestName={this.handleGuestName}
           handleGuestRsvp={this.handleGuestRsvp}
           handleGuestGuests={this.handleGuestGuests}
+          handleAddressL1={this.handleAddressL1}
+          handleAddressL2={this.handleAddressL2}
+          handleAddressCity={this.handleAddressCity}
+          handleAddressState={this.handleAddressState}
+          handleAddressZipcode={this.handleAddressZipcode}
           handleUpdateGuest={this.handleUpdateGuest}
          />
       </div>

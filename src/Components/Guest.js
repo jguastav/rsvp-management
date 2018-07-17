@@ -38,8 +38,13 @@ const Guest = props => (
             isConfirmed={props.isConfirmed}
             guests={props.guests}
             handleGuestName={e => props.handleGuestName(e.target.value)}
-            handleGuestRsvp={e => props.handleGuestRsvp(e.target.value)}
+            handleGuestRsvp={checked => props.handleGuestRsvp(checked)}
             handleGuestGuests={e => props.handleGuestGuests(Number(e.imaginaryTarget.value))}
+            handleAddressL1={e => props.handleAddressL1(e.target.value)}
+            handleAddressL2={e => props.handleAddressL2(e.target.value)}
+            handleAddressCity={e => props.handleAddressCity(e.target.value)}
+            handleAddressState={e => props.handleAddressState(e.target.value)}
+            handleAddressZipcode={e => props.handleAddressZipcode(e.target.value)}
           />
         </ModalWrapper>
       </div>
@@ -56,6 +61,11 @@ Guest.propTypes = {
   handleGuestName: PropTypes.func.isRequired,
   handleGuestRsvp: PropTypes.func.isRequired,
   handleGuestGuests: PropTypes.func.isRequired,
+  handleAddressL1: PropTypes.func.isRequired,
+  handleAddressL2: PropTypes.func.isRequired,
+  handleAddressCity: PropTypes.func.isRequired,
+  handleAddressState: PropTypes.func.isRequired,
+  handleAddressZipcode: PropTypes.func.isRequired,
   handleUpdateGuest: PropTypes.func.isRequired
 }
 
