@@ -6,7 +6,19 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      editing: "xw1",
+      guestData: {
+        // id: "",
+        // name: "",
+        // isConfirmed: false,
+        // guests: 0,
+        // address: {
+        //   l1: "",
+        //   l2: "",
+        //   city: "",
+        //   state: "",
+        //   zipcode: ""
+        // }
+      },
       guests: [
         {
           id: "xw1",
@@ -37,12 +49,51 @@ class App extends Component {
       ]
     }
   }
+
+  handleGuestName = (name, id) =>
+    this.updateGuestData('name', name, id);
+
+  handleGuestRsvp = (rsvp, id) =>
+    this.updateGuestData('isConfirmed', rsvp, id);
+
+  handleGuestGuests = (guests, id) =>
+    this.updateGuestData('guests', guests, id);
+
+  updateGuestData = (attribute, value, id) => 
+    this.setState({
+      guestData: {
+        ...this.state.guestData,
+        id: id, 
+        [attribute]: value
+      }
+    });
+  
+  handleUpdateGuest = (e, id) => {
+    this.setState({
+      guests: this.state.guests.map((guest, index) => {
+        if (guest.id === id) {
+          return {
+            ...guest,
+            ...this.state.guestData
+          }
+        }
+        return guest;
+      }),
+      guestData: {}
+    });
+
+    return true;
+  }
+
   render() {
     return (
       <div className="content-wrapper">
         <GuestList
           guests={this.state.guests}
-          editing={this.state.editing}
+          handleGuestName={this.handleGuestName}
+          handleGuestRsvp={this.handleGuestRsvp}
+          handleGuestGuests={this.handleGuestGuests}
+          handleUpdateGuest={this.handleUpdateGuest}
          />
       </div>
     );

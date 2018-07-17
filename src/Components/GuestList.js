@@ -13,7 +13,10 @@ const Guests = props => (
           address={guest.address}
           isConfirmed={guest.isConfirmed}
           guests={guest.guests}
-          isEditing={props.editing === guest.id}
+          handleGuestName={name => props.handleGuestName(name, guest.id)}
+          handleGuestRsvp={rsvp => props.handleGuestRsvp(rsvp, guest.id)}
+          handleGuestGuests={guests => props.handleGuestGuests(guests, guest.id)}
+          handleUpdateGuest={(e) => props.handleUpdateGuest(e, guest.id)}
         />
       </li>
     )}
@@ -22,7 +25,10 @@ const Guests = props => (
 
 Guests.propTypes = {
   guests: PropTypes.array.isRequired,
-  editing: PropTypes.string.isRequired
+  handleGuestName: PropTypes.func.isRequired,
+  handleGuestRsvp: PropTypes.func.isRequired,
+  handleGuestGuests: PropTypes.func.isRequired,
+  handleUpdateGuest: PropTypes.func.isRequired
 }
 
 export default Guests;

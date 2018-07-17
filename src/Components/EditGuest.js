@@ -5,17 +5,18 @@ import { FormGroup } from 'carbon-components-react';
 import { TextInput } from 'carbon-components-react';
 import { NumberInput } from 'carbon-components-react';
 import { Toggle} from 'carbon-components-react';
-import { Button } from 'carbon-components-react';
 import './EditGuest.css';
 
 const EditGuest = props => (
   <div className="edit-guest">
-    <Form className="edit-guest__form" onSubmit={false}>
+    <Form className="edit-guest__form">
       <FormGroup className="edit-guest__name-wrapper" legendText="Guest Name">
         <TextInput
+          labelText=""
           className="edit-guest__name"
           id={"guest-" + props.id + "-name"}
           defaultValue={props.name}
+          onChange={props.handleGuestName}
         />
       </FormGroup>
       <FormGroup className="edit-guest__rsvp-wrapper" legendText="RSVP">
@@ -24,6 +25,7 @@ const EditGuest = props => (
           id={"guest-" + props.id + "-rsvp"}
           labelA="No"
           labelB="Yes"
+          onToggle={props.handleGuestRsvp}
           defaultToggled={props.isConfirmed}
         />
         <NumberInput
@@ -35,6 +37,7 @@ const EditGuest = props => (
           value={props.guests}
           step={1}
           invalidText="Must be a number between 0 and 4."
+          onChange={props.handleGuestGuests}
         />
       </FormGroup>
       <FormGroup className="edit-address" legendText="Address">
@@ -68,9 +71,7 @@ const EditGuest = props => (
           id={"address-" + props.id + "-zipcode"}
           defaultValue={props.address.zipcode}
         />
-
       </FormGroup>
-      <Button type="submit" className="some-class">Update</Button>
     </Form>
   </div>
 );
@@ -81,6 +82,9 @@ EditGuest.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
   guests: PropTypes.number.isRequired,
   address: PropTypes.object.isRequired,
+  handleGuestName: PropTypes.func.isRequired,
+  handleGuestRsvp: PropTypes.func.isRequired,
+  handleGuestGuests: PropTypes.func.isRequired
 }
 
 export default EditGuest;

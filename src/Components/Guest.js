@@ -28,7 +28,8 @@ const Guest = props => (
           id="edit-guest-modal"
           buttonTriggerText="Edit"
           modalHeading={"Edit " + props.name}
-          handleSubmit={null}
+          handleSubmit={e => props.handleUpdateGuest(e)}
+          shouldCloseAfterSubmit
         >
           <EditGuest
             id={props.id}
@@ -36,6 +37,9 @@ const Guest = props => (
             address={props.address}
             isConfirmed={props.isConfirmed}
             guests={props.guests}
+            handleGuestName={e => props.handleGuestName(e.target.value)}
+            handleGuestRsvp={e => props.handleGuestRsvp(e.target.value)}
+            handleGuestGuests={e => props.handleGuestGuests(Number(e.imaginaryTarget.value))}
           />
         </ModalWrapper>
       </div>
@@ -49,6 +53,10 @@ Guest.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
   guests: PropTypes.number.isRequired,
   address: PropTypes.object.isRequired,
+  handleGuestName: PropTypes.func.isRequired,
+  handleGuestRsvp: PropTypes.func.isRequired,
+  handleGuestGuests: PropTypes.func.isRequired,
+  handleUpdateGuest: PropTypes.func.isRequired
 }
 
 export default Guest;
