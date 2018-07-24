@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Guest from './Guest';
 
-const Guests = props => (
+const GuestList = props => (
   <ul>
     {props.guests.map(guest =>
       <li key={guest.id}>
@@ -27,7 +27,7 @@ const Guests = props => (
   </ul>
 );
 
-Guests.propTypes = {
+GuestList.propTypes = {
   guests: PropTypes.array.isRequired,
   handleGuestName: PropTypes.func.isRequired,
   handleGuestRsvp: PropTypes.func.isRequired,
@@ -40,4 +40,4 @@ Guests.propTypes = {
   handleUpdateGuest: PropTypes.func.isRequired
 }
 
-export default Guests;
+export default GuestList;

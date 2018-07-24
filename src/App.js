@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { Tile } from 'carbon-components-react';
-// import { ModalWrapper } from 'carbon-components-react';
 import GuestList from './Components/GuestList';
 import NewGuest from './Components/NewGuest';
 import './App.css';
 
 class App extends Component {
 
-
-
   constructor() {
     super();
     this.state = {
       newGuest: '',
-      guestData: {},
+      editGuestData: {},
       guests: []
     }
   }
@@ -65,9 +62,9 @@ class App extends Component {
 
   updateGuestAddress = (attribute, value) => 
     this.setState({
-      guestData: {
+      editGuestData: {
         address: {
-          ...this.state.guestData.address,
+          ...this.state.editGuestData.address,
           [attribute]: value
         }
       }
@@ -75,8 +72,8 @@ class App extends Component {
 
   updateGuestData = (attribute, value, id) => 
     this.setState({
-      guestData: {
-        ...this.state.guestData,
+      editGuestData: {
+        ...this.state.editGuestData,
         id: id, 
         [attribute]: value
       }
@@ -103,12 +100,12 @@ class App extends Component {
         if (guest.id === id) {
           return {
             ...guest,
-            ...this.state.guestData
+            ...this.state.editGuestData
           }
         }
         return guest;
       }),
-      guestData: {}
+      editGuestData: {}
     });
 
     return true;
@@ -124,20 +121,6 @@ class App extends Component {
             handleAddGuest={e => this.handleAddGuest(e)}
           />
         </Tile>
-        {/* <Tile>
-          <ModalWrapper
-            id={"edit-new-guest-modal"}
-            buttonTriggerText="Add Guest"
-            modalHeading={"Add Guest"}
-            handleSubmit={e => this.handleAddGuest(e)}
-            shouldCloseAfterSubmit
-          >
-            <NewGuest
-              name={this.state.newGuest}
-              handleNewGuestName={e => this.handleNewGuestName(e.target.value)}
-            />
-          </ModalWrapper>
-        </Tile> */}
         <GuestList
           guests={this.state.guests}
           handleGuestName={this.handleGuestName}

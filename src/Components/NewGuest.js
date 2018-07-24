@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'carbon-components-react';
-import { FormGroup } from 'carbon-components-react';
 import { Button } from 'carbon-components-react';
 import { TextInput } from 'carbon-components-react';
 import './NewGuest.css';
