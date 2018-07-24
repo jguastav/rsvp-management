@@ -45,39 +45,61 @@ class App extends Component {
   handleGuestGuests = (guests, id) =>
     this.updateGuestData('guests', guests, id);
 
-  handleAddressL1 = (l1) =>
-    this.updateGuestAddress('l1', l1);
+  handleAddressL1 = (l1, id) =>
+    this.updateGuestAddress('l1', l1, id);
 
-  handleAddressL2 = (l2) =>
-    this.updateGuestAddress('l2', l2);
+  handleAddressL2 = (l2, id) =>
+    this.updateGuestAddress('l2', l2, id);
 
-  handleAddressCity = (city) =>
-    this.updateGuestAddress('city', city);
+  handleAddressCity = (city, id) =>
+    this.updateGuestAddress('city', city, id);
 
-  handleAddressState = (state) =>
-    this.updateGuestAddress('state', state);
+  handleAddressState = (state, id) =>
+    this.updateGuestAddress('state', state, id);
 
-  handleAddressZipcode = (zipcode) =>
-    this.updateGuestAddress('zipcode', zipcode);
+  handleAddressZipcode = (zipcode, id) =>
+    this.updateGuestAddress('zipcode', zipcode, id);
 
-  updateGuestAddress = (attribute, value) => 
-    this.setState({
-      editGuestData: {
-        address: {
-          ...this.state.editGuestData.address,
-          [attribute]: value
-        }
+  updateGuestAddress = (attribute, value, id) => {
+    let guest = this.state.guests.filter(guest => guest.id === id)
+    let address = {};
+
+    // Get current address.
+    if (guest.length > 0) {
+      address = {
+        ...guest[0].address
       }
-    });
+    }
 
-  updateGuestData = (attribute, value, id) => 
+    // Combine old address with data in editGuestData.
+    if (this.state.editGuestData[id] && ('address' in this.state.editGuestData[id])) {
+      address = {
+        ...address,
+        ...this.state.editGuestData[id].address
+      };
+    }
+
+    // Update address field.
+    address = {
+        ...address,
+        [attribute]: value
+    }
+
+    this.updateGuestData('address', address, id);
+  }
+
+  updateGuestData = (attribute, value, id) => {
+    let guestData = {
+      ...this.state.editGuestData[id],
+      [attribute]: value
+    };
     this.setState({
       editGuestData: {
         ...this.state.editGuestData,
-        id: id, 
-        [attribute]: value
+        [id]: guestData
       }
     });
+  }
 
   handleAddGuest = (e) => {
     e.preventDefault();
@@ -100,12 +122,15 @@ class App extends Component {
         if (guest.id === id) {
           return {
             ...guest,
-            ...this.state.editGuestData
+            ...this.state.editGuestData[id]
           }
         }
         return guest;
       }),
-      editGuestData: {}
+      editGuestData: {
+        ...this.state.editGuestData,
+        [id]: {}
+      }
     });
 
     return true;

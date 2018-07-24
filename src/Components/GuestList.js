@@ -15,11 +15,11 @@ const GuestList = props => (
           handleGuestName={name => props.handleGuestName(name, guest.id)}
           handleGuestRsvp={rsvp => props.handleGuestRsvp(rsvp, guest.id)}
           handleGuestGuests={guests => props.handleGuestGuests(guests, guest.id)}
-          handleAddressL1={l1 => props.handleAddressL1(l1)}
-          handleAddressL2={l2 => props.handleAddressL2(l2)}
-          handleAddressCity={city => props.handleAddressCity(city)}
-          handleAddressState={state => props.handleAddressState(state)}
-          handleAddressZipcode={zipcode => props.handleAddressZipcode(zipcode)}
+          handleAddressL1={l1 => props.handleAddressL1(l1, guest.id)}
+          handleAddressL2={l2 => props.handleAddressL2(l2, guest.id)}
+          handleAddressCity={city => props.handleAddressCity(city, guest.id)}
+          handleAddressState={state => props.handleAddressState(state, guest.id)}
+          handleAddressZipcode={zipcode => props.handleAddressZipcode(zipcode, guest.id)}
           handleUpdateGuest={(e) => props.handleUpdateGuest(e, guest.id)}
         />
       </li>
