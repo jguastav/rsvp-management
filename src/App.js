@@ -1,57 +1,43 @@
 import React, { Component } from 'react';
 import { Tile } from 'carbon-components-react';
-import { ModalWrapper } from 'carbon-components-react';
+// import { ModalWrapper } from 'carbon-components-react';
 import GuestList from './Components/GuestList';
-import EditGuest from './Components/EditGuest';
+import NewGuest from './Components/NewGuest';
 import './App.css';
 
 class App extends Component {
+
+
+
   constructor() {
     super();
     this.state = {
-      guestData: {
-        // id: "",
-        // name: "",
-        // isConfirmed: false,
-        // guests: 0,
-        // address: {
-        //   l1: "",
-        //   l2: "",
-        //   city: "",
-        //   state: "",
-        //   zipcode: ""
-        // }
-      },
-      guests: [
-        {
-          id: "xw1",
-          name: "Maximo Mena",
-          isConfirmed: true,
-          guests: 2,
-          address: {
-            l1: "2505 E Williams Field Rd",
-            l2: "Apt 3076",
-            city: "Gilbert",
-            state: "AZ",
-            zipcode: "85295"
-          }
-        },
-        {
-          id: "xw2",
-          name: "Natalie Chagoya",
-          isConfirmed: false,
-          guests: 0,
-          address: {
-            l1: "2505 E Williams Field Rd",
-            l2: "Apt 3076",
-            city: "Gilbert",
-            state: "AZ",
-            zipcode: "85295"
-          }
-        }
-      ]
+      newGuest: '',
+      guestData: {},
+      guests: []
     }
   }
+
+  getGuestDefaultData = () => {
+    return {
+      id: "",
+      name: "",
+      isConfirmed: false,
+      guests: 0,
+      address: {
+        l1: "",
+        l2: "",
+        city: "",
+        state: "",
+        zipcode: ""
+      }
+    };
+  }
+
+  handleNewGuestName = (name) =>
+    this.setState({
+      newGuest: name
+    });
 
   handleGuestName = (name, id) =>
     this.updateGuestData('name', name, id);
@@ -96,19 +82,20 @@ class App extends Component {
       }
     });
 
-    handleAddGuest = (e, id) => {
-      let newGuest = this.state.guestData;
-      newGuest.id = Math.random().toString(36).substr(2, 9);
-      this.setState({
-        guests: [
-          ...this.state.guests,
-          newGuest
-        ],
-        guestData: {}
-      });
-  
-      return true;
-    }
+  handleAddGuest = (e) => {
+    e.preventDefault();
+    let newGuest = this.getGuestDefaultData();
+    newGuest.id = Math.random().toString(36).substr(2, 9);
+    newGuest.name = this.state.newGuest;
+
+    this.setState({
+      guests: [
+        newGuest,
+        ...this.state.guests
+      ],
+      newGuest: ''
+    });
+  }
   
   handleUpdateGuest = (e, id) => {
     this.setState({
@@ -131,6 +118,13 @@ class App extends Component {
     return (
       <div className="content-wrapper">
         <Tile>
+          <NewGuest
+            name={this.state.newGuest}
+            handleNewGuestName={e => this.handleNewGuestName(e.target.value)}
+            handleAddGuest={e => this.handleAddGuest(e)}
+          />
+        </Tile>
+        {/* <Tile>
           <ModalWrapper
             id={"edit-new-guest-modal"}
             buttonTriggerText="Add Guest"
@@ -138,23 +132,12 @@ class App extends Component {
             handleSubmit={e => this.handleAddGuest(e)}
             shouldCloseAfterSubmit
           >
-            <EditGuest
-              id=""
-              name=""
-              address={{l1: "", l2: "", city: "", state: "", zipcode: ""}}
-              isConfirmed={false}
-              guests={0}
-              handleGuestName={e => this.handleGuestName(e.target.value)}
-              handleGuestRsvp={checked => this.handleGuestRsvp(checked)}
-              handleGuestGuests={e => this.handleGuestGuests(Number(e.imaginaryTarget.value))}
-              handleAddressL1={e => this.handleAddressL1(e.target.value)}
-              handleAddressL2={e => this.handleAddressL2(e.target.value)}
-              handleAddressCity={e => this.handleAddressCity(e.target.value)}
-              handleAddressState={e => this.handleAddressState(e.target.value)}
-              handleAddressZipcode={e => this.handleAddressZipcode(e.target.value)}
+            <NewGuest
+              name={this.state.newGuest}
+              handleNewGuestName={e => this.handleNewGuestName(e.target.value)}
             />
           </ModalWrapper>
-        </Tile>
+        </Tile> */}
         <GuestList
           guests={this.state.guests}
           handleGuestName={this.handleGuestName}

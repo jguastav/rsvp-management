@@ -5,18 +5,14 @@ import './Address.css';
 const Address = props => (
   <div className="address">
     {/* <h4>Address</h4> */}
-    <div className="address__l1">{props.l1}</div>
-    <div className="address__l2">{props.l2}</div>
-    <div className="address__l3">{props.city ? props.city + ", " : ""}{props.state ? props.state + " " : ""}{props.zipcode}</div>
+    <div className="address__l1">{props.address.l1 || ''}</div>
+    <div className="address__l2">{props.address.l2 || ''}</div>
+    <div className="address__l3">{props.address.city ? props.address.city + ", " : ""}{props.address.state ? props.address.state + " " : ""}{props.address.zipcode || ''}</div>
   </div>
 );
 
 Address.propTypes = {
-  l1: PropTypes.string.isRequired,
-  l2: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
-  zipcode: PropTypes.string.isRequired
+  address: PropTypes.object.isRequired
 }
 
 export default Address;

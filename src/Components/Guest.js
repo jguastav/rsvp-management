@@ -16,16 +16,12 @@ const Guest = props => (
       </div>
       <div className="guest__address">
         <Address
-          l1={props.address.l1}
-          l2={props.address.l2}
-          city={props.address.city}
-          state={props.address.state}
-          zipcode={props.address.zipcode}
+          address={props.address || {}}
         />
       </div>
       <div className="guest__edit">
         <ModalWrapper
-          id={"edit-guest-" + props.name + "-modal"}
+          id={"edit-guest-" + props.id + "-modal"}
           buttonTriggerText="Edit"
           modalHeading={"Edit " + props.name}
           handleSubmit={e => props.handleUpdateGuest(e)}
@@ -33,10 +29,10 @@ const Guest = props => (
         >
           <EditGuest
             id={props.id}
-            name={props.name}
-            address={props.address}
-            isConfirmed={props.isConfirmed}
-            guests={props.guests}
+            name={props.name || ''}
+            address={props.address || {}}
+            isConfirmed={props.isConfirmed || false}
+            guests={props.guests || 0}
             handleGuestName={e => props.handleGuestName(e.target.value)}
             handleGuestRsvp={checked => props.handleGuestRsvp(checked)}
             handleGuestGuests={e => props.handleGuestGuests(Number(e.imaginaryTarget.value))}

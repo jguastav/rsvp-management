@@ -45,35 +45,35 @@ const EditGuest = props => (
           labelText="Line 1"
           className="edit-address__l1"
           id={"address-" + props.id + "-l1"}
-          defaultValue={props.address.l1}
+          defaultValue={props.address.l1 || ''}
           onChange={props.handleAddressL1}
         />
         <TextInput
           labelText="Line 2"
           className="edit-address__l2"
           id={"address-" + props.id + "-l2"}
-          defaultValue={props.address.l2}
+          defaultValue={props.address.l2 || ''}
           onChange={props.handleAddressL2}
         />
         <TextInput
           labelText="City"
           className="edit-address__city"
           id={"address-" + props.id + "-city"}
-          defaultValue={props.address.city}
+          defaultValue={props.address.city || ''}
           onChange={props.handleAddressCity}
         />
         <TextInput
           labelText="State"
           className="edit-address__state"
           id={"address-" + props.id + "-state"}
-          defaultValue={props.address.state}
+          defaultValue={props.address.state || ''}
           onChange={props.handleAddressState}
         />
         <TextInput
           labelText="Zipcode"
           className="edit-address__zipcode"
           id={"address-" + props.id + "-zipcode"}
-          defaultValue={props.address.zipcode}
+          defaultValue={props.address.zipcode || ''}
           onChange={props.handleAddressZipcode}
         />
       </FormGroup>
@@ -95,7 +95,6 @@ EditGuest.propTypes = {
   handleAddressCity: PropTypes.func.isRequired,
   handleAddressState: PropTypes.func.isRequired,
   handleAddressZipcode: PropTypes.func.isRequired,
-  handleUpdateGuest: PropTypes.func.isRequired
 }
 
 export default EditGuest;
