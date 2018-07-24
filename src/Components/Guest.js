@@ -19,30 +19,48 @@ const Guest = props => (
           address={props.address || {}}
         />
       </div>
-      <div className="guest__edit">
-        <ModalWrapper
-          id={"edit-guest-" + props.id + "-modal"}
-          buttonTriggerText="Edit"
-          modalHeading={"Edit " + props.name}
-          handleSubmit={e => props.handleUpdateGuest(e)}
-          shouldCloseAfterSubmit
-        >
-          <EditGuest
-            id={props.id}
-            name={props.name || ''}
-            address={props.address || {}}
-            isConfirmed={props.isConfirmed || false}
-            guests={props.guests || 0}
-            handleGuestName={e => props.handleGuestName(e.target.value)}
-            handleGuestRsvp={checked => props.handleGuestRsvp(checked)}
-            handleGuestGuests={e => props.handleGuestGuests(Number(e.imaginaryTarget.value))}
-            handleAddressL1={e => props.handleAddressL1(e.target.value)}
-            handleAddressL2={e => props.handleAddressL2(e.target.value)}
-            handleAddressCity={e => props.handleAddressCity(e.target.value)}
-            handleAddressState={e => props.handleAddressState(e.target.value)}
-            handleAddressZipcode={e => props.handleAddressZipcode(e.target.value)}
-          />
-        </ModalWrapper>
+      <div className="guest__actions">
+        <div className="guest__edit">
+          <ModalWrapper
+            id={"edit-guest-" + props.id + "-modal"}
+            buttonTriggerText="Edit"
+            modalHeading={"Edit " + props.name}
+            handleSubmit={e => props.handleUpdateGuest(e)}
+            shouldCloseAfterSubmit
+          >
+            <EditGuest
+              id={props.id}
+              name={props.name || ''}
+              address={props.address || {}}
+              isConfirmed={props.isConfirmed || false}
+              guests={props.guests || 0}
+              handleGuestName={e => props.handleGuestName(e.target.value)}
+              handleGuestRsvp={checked => props.handleGuestRsvp(checked)}
+              handleGuestGuests={e => props.handleGuestGuests(Number(e.imaginaryTarget.value))}
+              handleAddressL1={e => props.handleAddressL1(e.target.value)}
+              handleAddressL2={e => props.handleAddressL2(e.target.value)}
+              handleAddressCity={e => props.handleAddressCity(e.target.value)}
+              handleAddressState={e => props.handleAddressState(e.target.value)}
+              handleAddressZipcode={e => props.handleAddressZipcode(e.target.value)}
+            />
+          </ModalWrapper>
+        </div>
+        <div className="guest__remove">
+          <ModalWrapper
+              id={"remove-guest-" + props.id + "-modal"}
+              buttonTriggerText="Remove"
+              triggerButtonKind="danger"
+              modalHeading="Remove Guest"
+              primaryButtonText="Remove"
+              handleSubmit={e => props.handleRemoveGuest(e)}
+              shouldCloseAfterSubmit
+              danger
+            >
+            <div>
+              <h3>Are you sure you want to remove <strong>{props.name}</strong>?</h3>
+            </div>
+          </ModalWrapper>
+        </div>
       </div>
     </Tile>
   </div>
@@ -62,7 +80,8 @@ Guest.propTypes = {
   handleAddressCity: PropTypes.func.isRequired,
   handleAddressState: PropTypes.func.isRequired,
   handleAddressZipcode: PropTypes.func.isRequired,
-  handleUpdateGuest: PropTypes.func.isRequired
+  handleUpdateGuest: PropTypes.func.isRequired,
+  handleRemoveGuest: PropTypes.func.isRequired
 }
 
 export default Guest;

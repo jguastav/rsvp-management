@@ -21,6 +21,7 @@ const GuestList = props => (
           handleAddressState={state => props.handleAddressState(state, guest.id)}
           handleAddressZipcode={zipcode => props.handleAddressZipcode(zipcode, guest.id)}
           handleUpdateGuest={(e) => props.handleUpdateGuest(e, guest.id)}
+          handleRemoveGuest={(e) => props.handleRemoveGuest(e, guest.id)}
         />
       </li>
     )}
@@ -37,7 +38,8 @@ GuestList.propTypes = {
   handleAddressCity: PropTypes.func.isRequired,
   handleAddressState: PropTypes.func.isRequired,
   handleAddressZipcode: PropTypes.func.isRequired,
-  handleUpdateGuest: PropTypes.func.isRequired
+  handleUpdateGuest: PropTypes.func.isRequired,
+  handleRemoveGuest: PropTypes.func.isRequired
 }
 
 export default GuestList;

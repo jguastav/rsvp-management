@@ -136,6 +136,18 @@ class App extends Component {
     return true;
   }
 
+  handleRemoveGuest = (e, id) => {
+    const { [id]: value, ...newGuests} = this.state.editGuestData;
+
+    this.setState({
+      guests: this.state.guests.filter(guest => guest.id !== id),
+      editGuestData: newGuests
+    });
+
+    return true;
+  }
+
+
   render() {
     return (
       <div className="content-wrapper">
@@ -157,6 +169,7 @@ class App extends Component {
           handleAddressState={this.handleAddressState}
           handleAddressZipcode={this.handleAddressZipcode}
           handleUpdateGuest={this.handleUpdateGuest}
+          handleRemoveGuest={this.handleRemoveGuest}
          />
       </div>
     );

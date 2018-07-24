@@ -19,7 +19,13 @@
   border: 1px solid #ccc;
   margin-left: 4px;
 }
-.guest__address, 
-.guest__edit {
+.guest__address {
   margin-top:8px;
+}
+.guest__actions {
+  margin-top:16px;
+  display: flex;
+}
+.guest__edit {
+  margin-right:20px; 
 }
