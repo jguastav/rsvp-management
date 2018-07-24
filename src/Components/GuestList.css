@@ -1,0 +1,9 @@
+.guest-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.guest-list__item {
+  padding:10px;
+}

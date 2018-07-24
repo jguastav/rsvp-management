@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Guest from './Guest';
+import './GuestList.css';
 
 const GuestList = props => (
-  <ul>
+  <ul className="guest-list">
     {props.guests.map(guest =>
-      <li key={guest.id}>
+      <li key={guest.id} className="guest-list__item">
         <Guest
           id={guest.id}
           name={guest.name}

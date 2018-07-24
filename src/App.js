@@ -152,6 +152,7 @@ class App extends Component {
     return (
       <div className="content-wrapper">
         <Tile>
+          <h1 className="app-title">Wedding Guest List</h1> 
           <NewGuest
             name={this.state.newGuest}
             handleNewGuestName={e => this.handleNewGuestName(e.target.value)}
