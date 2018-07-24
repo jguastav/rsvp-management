@@ -1,7 +1,6 @@
-## Wedding RSVP app
+## RSVP Management
 
 ### TODO:
-- Display RSVP Code (last 6 characters of id)
-- Add new guest
 - Connect with firebase
+- Display RSVP Code (last 6 characters of id)
 - Make client app
