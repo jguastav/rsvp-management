@@ -5,7 +5,13 @@ import './GuestList.css';
 
 const GuestList = props => (
   <ul className="guest-list">
-    {props.guests.map(guest =>
+    {props.guests
+      .filter(guest => {
+        const name = guest.name ? guest.name.toLowerCase() : '';
+        const newGuest = props.newGuest ? props.newGuest.toLowerCase() : '';
+        return name.includes(newGuest); 
+      })
+      .map(guest =>
       <li key={guest.id} className="guest-list__item">
         <Guest
           id={guest.id}
@@ -31,6 +37,7 @@ const GuestList = props => (
 
 GuestList.propTypes = {
   guests: PropTypes.array.isRequired,
+  newGuest: PropTypes.string.isRequired,
   handleGuestName: PropTypes.func.isRequired,
   handleGuestRsvp: PropTypes.func.isRequired,
   handleGuestGuests: PropTypes.func.isRequired,

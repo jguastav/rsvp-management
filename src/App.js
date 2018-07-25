@@ -161,6 +161,7 @@ class App extends Component {
         </Tile>
         <GuestList
           guests={this.state.guests}
+          newGuest={this.state.newGuest}
           handleGuestName={this.handleGuestName}
           handleGuestRsvp={this.handleGuestRsvp}
           handleGuestGuests={this.handleGuestGuests}
