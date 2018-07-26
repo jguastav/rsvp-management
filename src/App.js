@@ -134,19 +134,24 @@ class App extends Component {
   }
   
   handleUpdateGuest = (e, id) => {
+    // Find guest.
+    let guest2update = this.state.guests.find(guest => {
+      return guest.id === id; 
+    });
 
-    firebase.database().ref(`/guests/${id}`).set(this.state.editGuestData[id]);
+    // Abort if no guest is found.
+    if (!guest2update) {
+      return false;
+    }
 
+    // Update guest on firebase.
+    firebase.database().ref(`/guests/${id}`).set({
+      ...guest2update,
+      ...this.state.editGuestData[id]
+    });
+
+    // Clear editGuestData.
     this.setState({
-      // guests: this.state.guests.map((guest, index) => {
-      //   if (guest.id === id) {
-      //     return {
-      //       ...guest,
-      //       ...this.state.editGuestData[id]
-      //     }
-      //   }
-      //   return guest;
-      // }),
       editGuestData: {
         ...this.state.editGuestData,
         [id]: {}
