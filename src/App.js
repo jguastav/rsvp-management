@@ -162,10 +162,12 @@ class App extends Component {
   }
 
   handleRemoveGuest = (e, id) => {
-    const { [id]: value, ...newGuests} = this.state.editGuestData;
 
+    firebase.database().ref(`/guests/${id}`).remove();
+
+    // Remove guest from editGuestData.
+    const { [id]: value, ...newGuests} = this.state.editGuestData;
     this.setState({
-      guests: this.state.guests.filter(guest => guest.id !== id),
       editGuestData: newGuests
     });
 
