@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Tile } from 'carbon-components-react';
+import firebase from './firebase.js';
 import GuestList from './Components/GuestList';
 import NewGuest from './Components/NewGuest';
 import './App.css';
@@ -29,6 +30,25 @@ class App extends Component {
         zipcode: ""
       }
     };
+  }
+
+  componentDidMount() {
+    firebase.database().ref('guests').on('value', (snapshot) => {
+      let guests = [];
+      let defaultData = this.getGuestDefaultData();
+
+      snapshot.forEach(guest => {
+        guests.push({
+          ...defaultData,
+          ...guest.val(),
+          id: guest.key
+        });
+      });
+
+      this.setState({
+        guests: guests
+      });
+    });
   }
 
   handleNewGuestName = (name) =>
@@ -103,30 +123,30 @@ class App extends Component {
 
   handleAddGuest = (e) => {
     e.preventDefault();
-    let newGuest = this.getGuestDefaultData();
-    newGuest.id = Math.random().toString(36).substr(2, 9);
-    newGuest.name = this.state.newGuest;
+
+    firebase.database().ref('guests').push({
+      name: this.state.newGuest
+    });
 
     this.setState({
-      guests: [
-        newGuest,
-        ...this.state.guests
-      ],
       newGuest: ''
     });
   }
   
   handleUpdateGuest = (e, id) => {
+
+    firebase.database().ref(`/guests/${id}`).set(this.state.editGuestData[id]);
+
     this.setState({
-      guests: this.state.guests.map((guest, index) => {
-        if (guest.id === id) {
-          return {
-            ...guest,
-            ...this.state.editGuestData[id]
-          }
-        }
-        return guest;
-      }),
+      // guests: this.state.guests.map((guest, index) => {
+      //   if (guest.id === id) {
+      //     return {
+      //       ...guest,
+      //       ...this.state.editGuestData[id]
+      //     }
+      //   }
+      //   return guest;
+      // }),
       editGuestData: {
         ...this.state.editGuestData,
         [id]: {}
