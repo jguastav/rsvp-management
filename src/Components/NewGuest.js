@@ -17,6 +17,7 @@ const NewGuest = props => (
               onChange={props.handleNewGuestName}
               value={props.name}
               placeholder="Enter guest name"
+              className="new-guest__name"
             />
           </div>
           <div className="bx--col-xs-3">

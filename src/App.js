@@ -174,32 +174,67 @@ class App extends Component {
     return true;
   }
 
+  getInvitedGuestCount = () => {
+    if (!this.state.guests) {
+      return 0;
+    }
+
+    return this.state.guests.reduce((accumulator, guest) =>
+      accumulator + 1 + guest.guests,
+    0); 
+  }
+
+  getConfirmedGuestCount = () => {
+    if (!this.state.guests) {
+      return 0;
+    }
+
+    return this.state.guests.reduce((accumulator, guest) =>
+      accumulator + (guest.isConfirmed ? (1 + guest.guests) : 0),
+     0); 
+  }
 
   render() {
     return (
-      <div className="content-wrapper">
-        <Tile>
-          <h1 className="app-title">Wedding Guest List</h1> 
-          <NewGuest
-            name={this.state.newGuest}
-            handleNewGuestName={e => this.handleNewGuestName(e.target.value)}
-            handleAddGuest={e => this.handleAddGuest(e)}
+      <div className="app">
+        <div className="app__meta">
+          <Tile>
+            <h1 className="app__title">Wedding Guest List</h1> 
+            <NewGuest
+              name={this.state.newGuest}
+              handleNewGuestName={e => this.handleNewGuestName(e.target.value)}
+              handleAddGuest={e => this.handleAddGuest(e)}
+            />
+            <div className="app__stats">
+              <div className="bx--grid">
+                <div className="bx--row">
+                  <div className="bx--col-xs-6">
+                    <div className="app__invited"><strong>Invited Guests:</strong> {this.getInvitedGuestCount()}</div>
+                  </div>
+                  <div className="bx--col-xs-6 ">
+                    <div className="app__confirmed"><strong>Confirmed Guests:</strong> {this.getConfirmedGuestCount()}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Tile>
+        </div>
+        <div className="app__guest-list">
+          <GuestList
+            guests={this.state.guests}
+            newGuest={this.state.newGuest}
+            handleGuestName={this.handleGuestName}
+            handleGuestRsvp={this.handleGuestRsvp}
+            handleGuestGuests={this.handleGuestGuests}
+            handleAddressL1={this.handleAddressL1}
+            handleAddressL2={this.handleAddressL2}
+            handleAddressCity={this.handleAddressCity}
+            handleAddressState={this.handleAddressState}
+            handleAddressZipcode={this.handleAddressZipcode}
+            handleUpdateGuest={this.handleUpdateGuest}
+            handleRemoveGuest={this.handleRemoveGuest}
           />
-        </Tile>
-        <GuestList
-          guests={this.state.guests}
-          newGuest={this.state.newGuest}
-          handleGuestName={this.handleGuestName}
-          handleGuestRsvp={this.handleGuestRsvp}
-          handleGuestGuests={this.handleGuestGuests}
-          handleAddressL1={this.handleAddressL1}
-          handleAddressL2={this.handleAddressL2}
-          handleAddressCity={this.handleAddressCity}
-          handleAddressState={this.handleAddressState}
-          handleAddressZipcode={this.handleAddressZipcode}
-          handleUpdateGuest={this.handleUpdateGuest}
-          handleRemoveGuest={this.handleRemoveGuest}
-         />
+        </div>
       </div>
     );
   }
